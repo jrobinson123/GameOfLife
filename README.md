@@ -104,3 +104,48 @@ void update(){
       alive = newState;
     }
  ```
+ The cells 2D-Array is controlled in a seperate class called GOL(for Game of Life). When GOL is initialized it will initialize each Cell in cells with a random alive value. 
+ ```processing
+ class GOL{
+  
+
+  GOL(){     
+    for(int x = 0; x < cols; x++){
+     for(int y = 0; y < rows; y++){
+        boolean alive;
+        if(Math.random() > 0.50){
+          alive = true;
+        }else{
+          alive = false;
+        }
+        cells[x][y] = new Cell(x,y,alive);
+      } 
+    }
+    
+  }
+  ```
+  GOL has two methods, one which displays cells by calling the display method in Cell. And another which updates cells, which calls the update method in Cell for every Cell in cells, followed by the change method.
+  ```
+  void update(){
+    for(int x = 0; x < cols; x++){
+      for(int y = 0; y < rows; y++){
+        cells[x][y].update();  
+      }
+    }
+    for(int x = 0; x < cols; x++){
+      for(int y = 0; y < rows; y++){
+        cells[x][y].change();  
+      }
+    }
+  }
+  ```
+  After the only GOL object(called gol) is created, the main draw loop of this program consists of running the display method of GOL followed by the update method of GOl. 
+  ```processing
+   gol = new GOL();
+}
+
+void draw(){
+  gol.display();
+  gol.update();
+}
+  ```
