@@ -125,7 +125,7 @@ void update(){
   }
   ```
   GOL has two methods, one which displays cells by calling the display method in Cell. And another which updates cells, which calls the update method in Cell for every Cell in cells, followed by the change method.
-  ```
+  ```processing
   void update(){
     for(int x = 0; x < cols; x++){
       for(int y = 0; y < rows; y++){
@@ -145,7 +145,7 @@ void update(){
 }
 
 void draw(){
-  gol.display();
-  gol.update();
+    gol.display();
+    gol.update();
 }
   ```
