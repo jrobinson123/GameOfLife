@@ -15,3 +15,23 @@ size = 10;
   rows = height/size;
   cells = new Cell[cols][rows];
 ```
+As an argument each cell takes in an x and y value and a boolean that indicates whether or not it is alive. The x and y variables indicate the x and y index of the Cell in cells. The x and y variables are also used to calculate the x and y position of the Cell. The neighbors array stores the indices of the neighboring Cells. 
+```processing
+class Cell{
+  PVector pos;
+  int x;
+  int y;
+  boolean alive;
+  boolean newState;
+  PVector[] neighbors;
+  Cell(int x, int y, boolean alive){
+    pos  = new PVector(x * size, y * size);
+    this.x = x;
+    this.y = y;
+    this.alive = alive;
+    neighbors = new PVector[8];  
+    initializeNeighbors();
+    
+  }
+```
+
