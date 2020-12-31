@@ -139,7 +139,7 @@ void update(){
     }
   }
   ```
-  After the only GOL object(called gol) is created, the main draw loop of this program consists of running the display method of GOL followed by the update method of GOl. 
+  After the only GOL object(called gol) is created, the main draw loop of this program consists of running the display method of GOL followed by the update method of GOL. 
   ```processing
    gol = new GOL();
 }
