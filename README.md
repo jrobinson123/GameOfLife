@@ -70,4 +70,37 @@ void initializeNeighbors(){
      index++;
    }
  ```
-
+The update method in Cell first determines how many of a Cell's neighboring Cells are alive by iterating through neighbors.
+```processing
+void update(){
+    int numOfAliveNeighbors = 0;
+    for(PVector p:neighbors){
+      if(cells[(int)p.x][(int)p.y].alive == true){
+        numOfAliveNeighbors++;
+      }
+    }
+ ```
+ Based on Conway's rules for the Game of Life. The Cell will calculate whether it will be dead or alive the next frame. This value is stored not in alive but a seperate variable called newState. The reason a new temporary variable must be used is because since the new value of alive depends on other Cells, we can't have some Cells update their values before others. 
+ ```processing
+ if(alive == true){
+      if(numOfAliveNeighbors < 2){
+        newState = false;
+      }else if(numOfAliveNeighbors > 3){
+        newState = false;
+      }else{
+        newState = alive;
+      }
+    }else{
+      if(numOfAliveNeighbors == 3){
+        newState = true;
+      }else{
+        newState = alive;
+      }
+    }
+ ```
+ A seperate method called change is used to finally update alive to be equal to newState.
+ ```processing
+   void change(){
+      alive = newState;
+    }
+ ```
