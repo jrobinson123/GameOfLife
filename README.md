@@ -34,4 +34,40 @@ class Cell{
     
   }
 ```
+The initializeNeighbors method is what is used to populate the neighbors array for each Cell. Three local variables are used in this method. The first is index which represents the index of the neighbors array that we need to modify. Index starts at zero and will increment everytime an element in neighbors has been defined. We also must use tempX and tempY in order to find the x and y value of each neighboring Cell and then put those values into a new PVector in neighbors. 
+```processing
+void initializeNeighbors(){
+    int index = 0;
+    int tempX;
+    int tempY;
+ ```
+ The neighboring Cells we are looking at are to the left, right, up, down and diagonals of the original Cell. So therfore each of the x and y indcies of each neighboring Cell can be represented as a for-loop from y - 1 to y + 1 nested inside of a for-loop from x - 1 to x + 1. 
+ ```processing
+    for(int a = x - 1; a <= x +1; a++){
+      for(int b = y - 1; b <= y + 1; b++){
+ ```
+ However this doesn't properly account for edge cases. For example if the x value of the original Cell is 0, then some of the neighboring cells will have an x-coordinate of -1 which doesn't exist. To account for this, I wrote an if-statement that re-routes non-exisitent values to "wraparound the screen" for example changing tempX = -1 (the neighbor of 0 to the left) to tempX = Cols - 1(the rightmost x position). If no edge case exists then tempX and tempY are simply set to the itereable in the loops(a and b respectively). 
+ ```processing
+      if(a == -1){
+        tempX = cols - 1;
+      }else if(a == cols){
+        tempX = 0;
+      }else{
+        tempX = a;
+      }
+      if(b == -1){
+        tempY = rows - 1;
+      }else if(b == rows){
+        tempY = 0;
+      }else{
+        tempY = b;
+      }
+ ```
+ Finally because a Cell can't be a neighbor with itself, neighbors will only be added to when the values of a and b are not equal to x and y.
+ ```processing
+   if(!(a == x && b == y)){
+     neighbors[index] = new PVector(tempX,tempY);
+     index++;
+   }
+ ```
 
